@@ -25,7 +25,8 @@
         "pca_coordinates": {
             "spec": {
                 "attribute_type": "DataResource", 
-                "resource_type": "MTX"             
+                "resource_type": "MTX",
+                "many": false
             }
         },
         "pc1_explained_variance": {
