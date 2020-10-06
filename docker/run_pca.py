@@ -43,8 +43,12 @@ if __name__ == '__main__':
         samples_from_mtx = set(df.columns.tolist())
         requested_sample_list = [x.strip() for x in args.samples.split(',')]
         requested_sample_set = set(requested_sample_list)
-        if len(requested_sample_set.difference(samples_from_mtx)) > 0:
-            raise Exception('Requested samples differed from those in matrix.')
+        difference_set = requested_sample_set.difference(samples_from_mtx)
+        if len(difference_set) > 0:
+            sys.stderr.write('Requested samples differed from those in matrix: {csv}'.format(
+                csv = ','.join(difference_set)
+            ))
+            sys.exit(1)
         df = df[requested_sample_list]
 
     # now run the PCA
