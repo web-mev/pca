@@ -26,6 +26,22 @@ def parse_args():
     args = parser.parse_args()
     return args
 
+def get_file_reader(filename):
+    '''
+    Takes a filename and gets the file parser based on the extension.
+    '''
+    file_extension = filename.split('.')[-1].lower()
+
+    if file_extension == 'csv':
+        return pd.read_csv
+    elif file_extension in ['tsv', 'tab']:
+        return pd.read_table
+    elif file_extension in ['xls', 'xlsx']:
+        return pd.read_excel
+    else:
+        sys.stderr.write('Could not determine a file parser from the extension: %s' % file_extension)
+        sys.exit(1)
+
 if __name__ == '__main__':
     args = parse_args()
 
@@ -33,7 +49,8 @@ if __name__ == '__main__':
     working_dir = os.path.dirname(args.input_matrix)
     f = os.path.join(working_dir, args.input_matrix)
     if os.path.exists(f):
-        df = pd.read_table(f, index_col=0)
+        reader = get_file_reader(os.path.basename(f))
+        df = reader(f, index_col=0)
     else:
         sys.stderr.write('Could not find file: %s' % f)
         sys.exit(1)
@@ -54,9 +71,15 @@ if __name__ == '__main__':
     # now run the PCA
     pca = PCA(n_components=2)
 
-    # the fit_transform method expects a (samples, features) orientation
+    try:
+        # the fit_transform method expects a (samples, features) orientation
+        transformed = pca.fit_transform(df.T)
+    except Exception as ex:
+        sys.stderr.write('Encountered an exception while calculating the princpal components. Exiting.')
+        sys.exit(1)
+
     t_df = pd.DataFrame(
-        pca.fit_transform(df.T), 
+        transformed, 
         index=df.columns, 
         columns=['pc1', 'pc2']
     )
