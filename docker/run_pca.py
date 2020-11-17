@@ -79,9 +79,9 @@ if __name__ == '__main__':
         sys.exit(1)
 
     t_df = pd.DataFrame(
-        transformed, 
-        index=df.columns, 
-        columns=['pc1', 'pc2']
+        transformed.T, # note the transform so the resulting matrix matches our convention (Samples in cols)
+        columns=df.columns, 
+        index=['pc1', 'pc2']
     )
     fout = os.path.join(working_dir, 'pca_output.tsv')
     t_df.to_csv(fout, sep='\t')
