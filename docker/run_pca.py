@@ -71,6 +71,9 @@ if __name__ == '__main__':
     # now run the PCA
     pca = PCA(n_components=2)
 
+    # fill any NAs with zeros
+    df = df.fillna(0)
+
     try:
         # the fit_transform method expects a (samples, features) orientation
         transformed = pca.fit_transform(df.T)
