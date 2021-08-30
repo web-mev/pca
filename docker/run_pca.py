@@ -68,6 +68,24 @@ if __name__ == '__main__':
             sys.exit(1)
         df = df[requested_sample_list]
 
+    # check the size of the matrix. If either the number of samples or features is less than 2,
+    # we can't use the solver. Practically, there is no utility in running such a PCA anyway.
+    df_shape = df.shape
+    # if the number of features is less than 2, there's no point to PCA anyway
+    if (df_shape[0] < 2):
+        sys.stderr.write('The number of clustering features is less than 2, and a 2-D PCA would' 
+             ' not make sense here. Typically, PCA is used to visualize high-dimensional data with many'
+             ' more clustering features than 2.'
+        )
+        sys.exit(1)
+    if (df_shape[1] < 2):
+        sys.stderr.write('The number of samples is less than 2, and a 2-D PCA would' 
+             ' not make sense here. Typically, PCA is used to visualize high-dimensional data'
+             ' such that relationships between samples can be explored.'
+        )
+        sys.exit(1)
+
+
     # now run the PCA
     pca = PCA(n_components=2)
 
