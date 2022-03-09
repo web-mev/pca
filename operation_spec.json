@@ -23,6 +23,7 @@
     }, 
     "outputs": {
         "pca_coordinates": {
+            "required": true,
             "spec": {
                 "attribute_type": "DataResource", 
                 "resource_type": "MTX",
@@ -30,6 +31,7 @@
             }
         },
         "pc1_explained_variance": {
+            "required": true,
             "spec": {
                 "attribute_type": "BoundedFloat",
                 "min": 0,
@@ -37,6 +39,7 @@
             }
         },
         "pc2_explained_variance": {
+            "required": true,
             "spec": {
                 "attribute_type": "BoundedFloat",
                 "min": 0,
