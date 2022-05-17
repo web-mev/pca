@@ -33,6 +33,7 @@ if __name__ == '__main__':
     working_dir = os.path.dirname(args.input_matrix)
     f = os.path.join(working_dir, args.input_matrix)
     if os.path.exists(f):
+        # the passed file should always be tab-delimited.
         df = pd.read_table(f, index_col=0, sep='\t')
     else:
         sys.stderr.write('Could not find file: %s' % f)
