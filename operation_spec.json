@@ -17,7 +17,7 @@
             "description": "The samples to use in the PCA. By default, it will use all samples/observations.", 
             "name": "Samples:", 
             "required": false, 
-            "converters": "api.converters.element_set.ObservationSetCsvConverter",
+            "converter": "api.converters.element_set.ObservationSetCsvConverter",
             "spec": {
                 "attribute_type": "ObservationSet"
             }
