@@ -3,7 +3,7 @@
 This repository contains a WebMeV-compatible analysis tool for performing a 2-d PCA analysis. 
 It creates a tab-delimited file with the reduced/projected coordinates.
 
-After pulling the Docker image (see "packages"), the PCA analysis can be run as follows:
+After pulling the Docker image (see "packages" under this repo), the PCA analysis can be run as follows:
 
 ```
 docker run -v $PWD:/work ghcr.io/web-mev/pca:<tag> \
@@ -16,7 +16,7 @@ and features in the rows, which might be the transpose of how scipy or other mac
 the canonical orientation has samples in columns and genes in rows. Thus, observations<==>samples and features<==>genes in our treatment.
 
 The optional `-s` flag is a comma-delimited string of the sample/column names you wish to use in the PCA. That is, it will subset the matrix to only
-those samples. Without this flag, all columns/samples will be considered.
+those samples. Without this flag, all columns/samples will be considered. An example is `-s sampleA,sampleB,sampleC`
 
 Note that the `-v` flag provided to the Docker `run` command is used to mount the current directory in the Docker container. 
 This allows the container to read/open your input matrix and also write results to that same directory.
