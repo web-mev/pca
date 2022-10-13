@@ -6,6 +6,7 @@
             "description": "The input matrix. For example, a gene expression matrix for a cohort of samples.", 
             "name": "Input matrix:", 
             "required": true, 
+            "converter": "api.converters.data_resource.LocalDockerSingleVariableDataResourceConverter",
             "spec": {
                 "attribute_type": "VariableDataResource", 
                 "resource_types": ["MTX","I_MTX", "EXP_MTX", "RNASEQ_COUNT_MTX"], 
@@ -16,6 +17,7 @@
             "description": "The samples to use in the PCA. By default, it will use all samples/observations.", 
             "name": "Samples:", 
             "required": false, 
+            "converters": "api.converters.element_set.ObservationSetCsvConverter",
             "spec": {
                 "attribute_type": "ObservationSet"
             }
@@ -24,6 +26,7 @@
     "outputs": {
         "pca_coordinates": {
             "required": true,
+            "converter": "api.converters.data_resource.LocalDockerSingleDataResourceConverter",
             "spec": {
                 "attribute_type": "DataResource", 
                 "resource_type": "MTX",
@@ -32,6 +35,7 @@
         },
         "pc1_explained_variance": {
             "required": true,
+            "converter": "api.converters.basic_attributes.FloatConverter",
             "spec": {
                 "attribute_type": "BoundedFloat",
                 "min": 0,
@@ -40,6 +44,7 @@
         },
         "pc2_explained_variance": {
             "required": true,
+            "converter": "api.converters.basic_attributes.FloatConverter",
             "spec": {
                 "attribute_type": "BoundedFloat",
                 "min": 0,
