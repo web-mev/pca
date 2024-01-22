@@ -1,10 +1,7 @@
-#! /usr/bin/python3
-
 import sys
 import os
 import json
 import pandas as pd
-import numpy as np
 from sklearn.decomposition import PCA
 import argparse
 
