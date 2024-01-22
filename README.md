@@ -7,8 +7,9 @@ After pulling the Docker image (see "packages" under this repo), the PCA analysi
 
 ```
 docker run -v $PWD:/work ghcr.io/web-mev/pca:<tag> \
-    -i <path to matrix> \
-    [-s <comma-delimited column names>]
+    python3 /usr/local/bin/run_pca.py \
+        -i <path to matrix> \
+        [-s <comma-delimited column names>]
 ```
 where the required `-i` argument gives the path to the matrix you wish to perform PCA upon. Note that we expect that the matrix is arranged with observations in the columns
 and features in the rows, which might be the transpose of how scipy or other machine learning toolkits handle PCA. In the genomics context 
@@ -24,7 +25,8 @@ This allows the container to read/open your input matrix and also write results 
 Thus, if you have a file `matrix.tsv` in your current directory, the command would look like:
 ```
 docker run -v $PWD:/work ghcr.io/web-mev/pca:<tag> \
-    -i /work/matrix.tsv
+    python3 /usr/local/bin/run_pca.py \
+        -i /work/matrix.tsv
 ```
 The output file (`pca_output.tsv`) will be written to `/work/pca_output.tsv` *inside* the container, which will be your current working directory
 on the host machine.
